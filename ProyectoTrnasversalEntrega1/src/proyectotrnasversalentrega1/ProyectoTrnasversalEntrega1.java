@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package proyectotrnasversalentrega1;
 
+import AccesoADatos.Conexion;
+import java.sql.Connection;
 /**
  *
  * @author Damián
@@ -17,6 +15,7 @@ public class ProyectoTrnasversalEntrega1 {
         // TODO code application logic here
         //hola
         //soy mari 
+        Connection con = Conexion.getConexion();
     }
     
 }
