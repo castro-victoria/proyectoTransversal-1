@@ -18,9 +18,11 @@ public class ProyectoTrnasversalEntrega1 {
         
         //Connection con = Conexion.getConexion();
         
-       Alumno juan= new Alumno(40000000, "DEramo", "Damián", LocalDate.of(2000, 4, 27), true);
+       Alumno juan= new Alumno(1, 45000000, "Castro", "Victoria", LocalDate.of(2000, 4, 27), true);
        AlumnoData alu = new AlumnoData();
-       alu.guardarAlumno(juan);
+       //alu.guardarAlumno(juan);
+       //alu.modificarAlumno(juan);
+       alu.eliminarAlumno(1);
     }
     
 }
