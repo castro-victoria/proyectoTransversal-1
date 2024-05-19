@@ -4,7 +4,9 @@ import AccesoADatos.AlumnoData;
 import AccesoADatos.Conexion;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.time.Month;
 import proyectotrnasversalentrega1.entidades.Alumno;
+
 /**
  *
  * @author Damián
@@ -15,14 +17,47 @@ public class ProyectoTrnasversalEntrega1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //Los queremos profes.
+        //Connection con = Conexion.getConexion(); (?
+        //CREATE
+        //Alumno damian = new Alumno(4, 33515875, "D'Eramo", "Damián", LocalDate.of(2000, Month.MAY, 27), true);
+
+        AlumnoData alu = new AlumnoData();
+        //alu.guardarAlumno(damian);
+
+        //UPDATE
+        //alu.modificarAlumno(damian);
         
-        //Connection con = Conexion.getConexion();
+        //DELETE (UPDATE) Lógico
+        //alu.eliminarAlumno(8);
         
-       Alumno juan= new Alumno(1, 45000000, "Castro", "Victoria", LocalDate.of(2000, 4, 27), true);
-       AlumnoData alu = new AlumnoData();
-       //alu.guardarAlumno(juan);
-       //alu.modificarAlumno(juan);
-       alu.eliminarAlumno(1);
+        //READ
+        System.out.println("Buscar alumno por ID");
+        Alumno encontrado = alu.buscarAlumno(4);
+        if (encontrado != null) {
+            System.out.println("Dni: " + encontrado.getDni());
+            System.out.println("Apellido: " + encontrado.getApellido());
+            System.out.println("Nombre: " + encontrado.getNombre());
+            System.out.println("Fecha nacimiento: " + encontrado.getFechaNac());
+        }
+        System.out.println("");
+        System.out.println("Buscar alumno por DNI");
+        Alumno encontradoPorDni = alu.buscarPorDni(33515875);
+        if (encontradoPorDni != null) {
+            System.out.println("Dni: " + encontradoPorDni.getDni());
+            System.out.println("Apellido: " + encontradoPorDni.getApellido());
+            System.out.println("Nombre: " + encontradoPorDni.getNombre());
+            System.out.println("Fecha nacimiento: " + encontradoPorDni.getFechaNac());
+        }
+        System.out.println("");
+        //Listar alumnos
+        System.out.println("Lista de alumnos activos");
+        for (Alumno alum : alu.listarAlumno()) {
+            System.out.println(alum.getApellido() + " " +  alum.getNombre());
+        }
+        
+        
+
     }
-    
+
 }
