@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import proyectotrnasversalentrega1.entidades.Alumno;
+import proyectotrnasversalentrega1.entidades.Inscripcion;
 import proyectotrnasversalentrega1.entidades.Materia;
 
 /**
@@ -36,7 +37,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         aData = new AlumnoData();
         listaA = aData.listarAlumno();
         modelo = new DefaultTableModel();
-        inscData = new InscripcionData;
+        inscData = new InscripcionData();
         mData = new MateriaData();
         cargaAlumnos();
         armarCabeceraTabla();
@@ -166,8 +167,8 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargaAlumnos() {
-        for (Alumno item : listaA) {
-            cboxAlumno.addItem(item);
+        for (Alumno items : listaA) {
+            cboxAlumno.addItem(items);
         }
     }
 
@@ -184,9 +185,9 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
 
     private void cargarDatosAlumnos() {
         Alumno selec = (Alumno) cboxAlumno.getSelectedItem();
-        List<Materia> lista = (ArrayList) inscData.obtenerMateriasCursadas(selec.getIdAlumno());
-        for (Materia mate : lista) {
-            modelo.addRow(new Object[]{mate.getIdMateria(), mate.getNombre(), mate.getAnioMateria()});
+        List<Inscripcion> lista = (ArrayList) inscData.obtenerInscripciones();
+        for (Inscripcion inscrip : lista) {
+            modelo.addRow(new Object[]{inscrip.getIdInscripcion(), inscrip.getMateria(), inscrip.getNota()});
         }
     }
     

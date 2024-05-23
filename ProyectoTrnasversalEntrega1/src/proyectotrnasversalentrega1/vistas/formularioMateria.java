@@ -5,7 +5,6 @@
 package proyectotrnasversalentrega1.vistas;
 
 import AccesoADatos.MateriaData;
-import java.util.TreeSet;
 import javax.swing.JOptionPane;
 import proyectotrnasversalentrega1.entidades.Materia;
 
@@ -14,9 +13,10 @@ import proyectotrnasversalentrega1.entidades.Materia;
  * @author Castro Maria Victoria
  */
 public class formularioMateria extends javax.swing.JInternalFrame {
+
     private MateriaData matData = new MateriaData();
-    private Materia materiactual=null;
-    
+    private Materia materiactual = null;
+
     public formularioMateria() {
         initComponents();
 
@@ -171,28 +171,28 @@ public class formularioMateria extends javax.swing.JInternalFrame {
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         // TODO add your handling code here:
-  
-        try {
-            Integer codigo= Integer.parseInt(jTFcodigo.getText()); 
-            int anio=Integer.parseInt(jTFanio.getText());
 
-            materiactual=matData.buscarMateria(codigo);
-            if (materiactual != null){
-                            
+        try {
+            Integer codigo = Integer.parseInt(jTFcodigo.getText());
+            int anio = Integer.parseInt(jTFanio.getText());
+
+            materiactual = matData.buscarMateria(codigo);
+            if (materiactual != null) {
+
                 jTFnombre.setText(materiactual.getNombre());
                 materiactual.setAnioMateria(anio);
                 jRBestado.setSelected(materiactual.isActivo());
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor ingresar un código valido");
-        }  
+        }
     }//GEN-LAST:event_jBbuscarActionPerformed
 
     private void jBnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnuevoActionPerformed
         // TODO add your handling code here:
         limpiar();
         jBeliminar.setEnabled(false);
-        materiactual=null;
+        materiactual = null;
     }//GEN-LAST:event_jBnuevoActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
@@ -201,19 +201,19 @@ public class formularioMateria extends javax.swing.JInternalFrame {
             matData.eliminarMateria(materiactual.getIdMateria());
             materiactual = null;
             limpiar();
-        }else {
-            JOptionPane.showMessageDialog(this, "No hay una meteria seleccionada");             
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay una meteria seleccionada");
         }
-        
+
     }//GEN-LAST:event_jBeliminarActionPerformed
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         // TODO add your handling code here:
         try {
-            Integer codigo = Integer.parseInt(jTFcodigo.getText()); 
-            String nombre=jTFnombre.getText();
-            if (nombre.isEmpty()){
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");   
+            Integer codigo = Integer.parseInt(jTFcodigo.getText());
+            String nombre = jTFnombre.getText();
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
                 return;
             }
             int anio = Integer.parseInt(jTFanio.getText());
@@ -221,7 +221,7 @@ public class formularioMateria extends javax.swing.JInternalFrame {
             if (materiactual == null) {
                 materiactual = new Materia(codigo, nombre, anio, estado);
                 matData.guardarMateria(materiactual);
-            }else {
+            } else {
                 materiactual.setIdMateria(codigo);
                 materiactual.setNombre(nombre);
                 materiactual.setAnioMateria(anio);
@@ -232,7 +232,7 @@ public class formularioMateria extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Por favor ingresar un número valido");
         }
 
-        
+
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
@@ -240,7 +240,7 @@ public class formularioMateria extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBsalirActionPerformed
 
-    private void limpiar(){
+    private void limpiar() {
         jTFcodigo.setText("");
         jTFnombre.setText("");
         jTFanio.setText("");

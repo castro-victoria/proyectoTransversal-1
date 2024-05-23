@@ -12,66 +12,69 @@ import proyectotrnasversalentrega1.entidades.Inscripcion;
 import proyectotrnasversalentrega1.entidades.Materia;
 
 public class FormularioInscripcion extends javax.swing.JInternalFrame {
+
     private List<Materia> listaM;
     private List<Alumno> listaA;
-    
+
     private InscripcionData inscData;
     private MateriaData mData;
     private AlumnoData aData;
     private DefaultTableModel modelo;
-    
+
     public FormularioInscripcion() {
         initComponents();
-        
+
         aData = new AlumnoData();
         listaA = (ArrayList<Alumno>) aData.listarAlumno();
         modelo = new DefaultTableModel();
         inscData = new InscripcionData();
         mData = new MateriaData();
-        
+
         cargarAlumno();
         armarCabeceraTabla();
-        
 
     }
-    private void cargarAlumno(){
+
+    private void cargarAlumno() {
         for (Alumno item : listaA) {
             cboxAlumno.addItem(item);
         }
     }
-    private void armarCabeceraTabla(){
-    ArrayList<Object> filaCabecera = new ArrayList<>();
-    filaCabecera.add("ID");
-    filaCabecera.add("Nombre");
-    filaCabecera.add("Año");
+
+    private void armarCabeceraTabla() {
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("ID");
+        filaCabecera.add("Nombre");
+        filaCabecera.add("Año");
         for (Object it : filaCabecera) {
             modelo.addColumn(modelo);
         }
-       jtMaterias.setModel(modelo);
+        jtMaterias.setModel(modelo);
     }
-    private void borrarFilaTabla(){
-    int indice = modelo.getRowCount()-1;
-        for (int i = indice; i >=0; i--) {
+
+    private void borrarFilaTabla() {
+        int indice = modelo.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-    
-    private void cargaDatosNoInscriptas(){
-    Alumno selec = (Alumno)cboxAlumno.getSelectedItem();
-    listaM = inscData.obtenerMateriasNoCursadas(selec.getIdAlumno());
+
+    private void cargaDatosNoInscriptas() {
+        Alumno selec = (Alumno) cboxAlumno.getSelectedItem();
+        listaM = inscData.obtenerMateriaNoCursadas(selec.getIdAlumno());
+
         for (Materia m : listaM) {
-            modelo.addRow(new Object[] { m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
         }
     }
-    private void cargaDatosInscriptas(){
-    Alumno selec = (Alumno)cboxAlumno.getSelectedItem();
-    List<Materia> lista = inscData.obtenerMateriasNoCursadas(selec.getIdAlumno());
+
+    private void cargaDatosInscriptas() {
+        Alumno selec = (Alumno) cboxAlumno.getSelectedItem();
+        List<Materia> lista = inscData.obtenerMateriaNoCursadas(selec.getIdAlumno());
         for (Materia m : lista) {
-            modelo.addRow(new Object[] { m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
         }
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -246,32 +249,32 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
         int filaSeleccionada = jtMaterias.getSelectedRow();
-        if(filaSeleccionada != -1){
-            Alumno a = (Alumno)cboxAlumno.getSelectedItem();
-            
-            int idMateria = (Integer)modelo.getValueAt(filaSeleccionada,0);
-            String nombreMateria = (String)modelo.getValueAt(filaSeleccionada, 1);
-            int anio = (Integer)modelo.getValueAt(filaSeleccionada, 2);
+        if (filaSeleccionada != -1) {
+            Alumno a = (Alumno) cboxAlumno.getSelectedItem();
+
+            int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+            String nombreMateria = (String) modelo.getValueAt(filaSeleccionada, 1);
+            int anio = (Integer) modelo.getValueAt(filaSeleccionada, 2);
             Materia m = new Materia(idMateria, nombreMateria, anio, true);
-            Inscripcion i = new Inscripcion(a,m,0);
+            Inscripcion i = new Inscripcion(a, m, 0);
             inscData.guardarInscripcion(i);
             borrarFilaTabla();
-            
-        }   
-        
+
+        }
+
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAInscribirActionPerformed
         int filaSeleccionada = jtMaterias.getSelectedRow();
-        if(filaSeleccionada != -1){
-        Alumno a = (Alumno) cboxAlumno.getSelectedItem();
-        int idMateria = (Integer)modelo.getValueAt(filaSeleccionada, 0);
-        inscData.borrarInscripcionMateriaAlumno(a.getIdAlumno(),idMateria);
-        borrarFilaTabla();
-        
-        
+        if (filaSeleccionada != -1) {
+            Alumno a = (Alumno) cboxAlumno.getSelectedItem();
+            int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+
+            inscData.borrarInscripcionMateria(a.getIdAlumno(), idMateria);
+            borrarFilaTabla();
+
         } else {
-        JOptionPane.showMessageDialog(null, "Ustede debe seleccionar una fila de la tabla");
+            JOptionPane.showMessageDialog(null, "Ustede debe seleccionar una fila de la tabla");
         }
     }//GEN-LAST:event_jbAInscribirActionPerformed
 
