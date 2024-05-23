@@ -1,4 +1,4 @@
-package Vistas;
+package proyectotrnasversalentrega1.vistas;
 
 import AccesoADatos.InscripcionData;
 import AccesoADatos.MateriaData;

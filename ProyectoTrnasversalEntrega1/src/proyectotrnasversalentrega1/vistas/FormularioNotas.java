@@ -5,6 +5,7 @@
 package proyectotrnasversalentrega1.vistas;
 
 import AccesoADatos.AlumnoData;
+import AccesoADatos.InscripcionData;
 import AccesoADatos.MateriaData;
 import java.util.ArrayList;
 import java.util.List;
