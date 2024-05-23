@@ -149,4 +149,62 @@ public class InscripcionData {
         }
         return alumnosMateria;
     } 
+    
+    public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno){
+    ArrayList<Inscripcion> cursadas = new ArrayList<>();
+    String sql = "SELECT * FROM inscripcion WHERE idAlumno =?";
+    
+     try {
+         PreparedStatement ps = con.prepareStatement(sql);
+         ps.setInt(1, idAlumno);
+         ResultSet rs= ps.executeQuery(); // porque enviamos un select
+         
+         while(rs.next()){
+             
+            Inscripcion insc = new Inscripcion();
+            insc.setIdInscripcion(rs.getInt("idInscripto"));
+            Alumno alu = ad.buscarAlumno(rs.getInt("idAlumno"));
+            Materia mat = md.buscarMateria(rs.getInt("idMateria"));
+            insc.setAlumno(alu);
+            insc.setMateria(mat);
+            insc.setNota(rs.getDouble("nota"));
+            cursadas.add(insc);
+         }
+         ps.close();
+         
+         
+     } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
+     }
+     return cursadas;
+    }
+    
+    public List<Materia> obtenerMateriasCursadas(int idAlumno){
+    ArrayList<Materia> materias = new ArrayList<>();
+    
+    String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion,"
+            + "materia WHERE inscripcion.idMateria = materia.idMateria " + 
+            " AND inscripcion.idAlumno = ?;";
+    
+     try {
+         PreparedStatement ps = con.prepareStatement(sql);
+         ps.setInt(1, idAlumno);
+         ResultSet rs = ps.executeQuery();
+         
+         while(rs.next()){
+         Materia materia = new Materia();
+         materia.setIdMateria(rs.getInt("idMateria"));
+         materia.setNombre(rs.getString("nombre"));
+         materia.setAnioMateria(rs.getInt("año"));
+         materias.add(materia);
+         }
+         ps.close();
+     
+     } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
+     }
+     return materias;
+            
+    
+    }
 }
