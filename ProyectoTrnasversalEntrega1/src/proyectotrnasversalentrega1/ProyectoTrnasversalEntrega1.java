@@ -74,12 +74,14 @@ public class ProyectoTrnasversalEntrega1 {
             System.out.println("Año: " + materias.getAnioMateria());*/
         
         InscripcionData id = new InscripcionData();
-        /*Alumno maria = alu.buscarAlumno(6);
-        Materia mate = mat.buscarMateria(2);*/
+        Alumno maria = alu.buscarAlumno(6);
+        Materia mate = mat.buscarMateria(4);
 
         //agregar 
-        /*Inscripcion insc = new Inscripcion(maria, mate, 0);
-        id.guardarInscripcion(insc);*/
+        Inscripcion insc = new Inscripcion(maria, mate, 8);
+        id.guardarInscripcion(insc);
+        
+        
         //actualizar nota
         //id.actualizarNota(6, 2, 0);
         //borrar inscripcion
