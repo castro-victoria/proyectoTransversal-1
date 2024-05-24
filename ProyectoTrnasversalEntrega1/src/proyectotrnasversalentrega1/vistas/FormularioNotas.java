@@ -39,7 +39,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         inscData = new InscripcionData();
         mData = new MateriaData();
-        cargaAlumnos();
+       // cargaAlumnos();
         armarCabeceraTabla();
     }
 
@@ -166,11 +166,11 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTableNotas;
     // End of variables declaration//GEN-END:variables
 
-    private void cargaAlumnos() {
+    /*private void cargaAlumnos() {
         for (Alumno items : listaA) {
             cboxAlumno.addItem(items);
         }
-    }
+    }*/
 
     private void armarCabeceraTabla() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
