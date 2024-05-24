@@ -39,7 +39,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         inscData = new InscripcionData();
         mData = new MateriaData();
-       // cargaAlumnos();
+        cargaAlumnos();
         armarCabeceraTabla();
     }
 
@@ -66,8 +66,12 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione un alumno:");
 
-        cboxAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboxAlumno.setSelectedIndex(-1);
+        cboxAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboxAlumnoActionPerformed(evt);
+            }
+        });
 
         jTableNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +87,11 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTableNotas);
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -154,11 +163,32 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void cboxAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxAlumnoActionPerformed
+        borrarFilaTabla();
+        cargarDatosAlumnos();
+    }//GEN-LAST:event_cboxAlumnoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        int filaSeleccionada = jTableNotas.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            Alumno alu = (Alumno) cboxAlumno.getSelectedItem();
+            //Materia mater = (Materia) cboxAlumno.getSelectedItem();
+            
+            
+            int codigo = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+            //String nombre = (String) modelo.getValueAt(filaSeleccionada, 1);
+            double nota = Double.parseDouble( (String)modelo.getValueAt(filaSeleccionada, 2));
+            System.out.println(alu.getIdAlumno());
+            System.out.println(codigo);
+            inscData.actualizarNota(alu.getIdAlumno(), codigo , nota);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cboxAlumno;
+    private javax.swing.JComboBox<Alumno> cboxAlumno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -166,11 +196,11 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTableNotas;
     // End of variables declaration//GEN-END:variables
 
-    /*private void cargaAlumnos() {
-        for (Alumno items : listaA) {
-            cboxAlumno.addItem(items);
+    private void cargaAlumnos() {
+        for (Alumno al : listaA) {
+            cboxAlumno.addItem(al);
         }
-    }*/
+    }
 
     private void armarCabeceraTabla() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
@@ -185,15 +215,15 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
 
     private void cargarDatosAlumnos() {
         Alumno selec = (Alumno) cboxAlumno.getSelectedItem();
-        List<Inscripcion> lista = (ArrayList) inscData.obtenerInscripciones();
+        List<Inscripcion> lista = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
         for (Inscripcion inscrip : lista) {
-            modelo.addRow(new Object[]{inscrip.getIdInscripcion(), inscrip.getMateria(), inscrip.getNota()});
+            modelo.addRow(new Object[]{inscrip.getMateria().getIdMateria(), inscrip.getMateria().getNombre(), inscrip.getNota()});
         }
     }
-    
-    private void borrarFilaTabla(){
-        int indice = modelo.getRowCount() -1;
-        for (int i = indice; i >=0; i--) {
+
+    private void borrarFilaTabla() {
+        int indice = modelo.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
