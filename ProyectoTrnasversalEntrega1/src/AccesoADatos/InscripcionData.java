@@ -139,6 +139,7 @@ public class InscripcionData {
             while (rs.next()) {
                 Alumno alumno = new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
@@ -197,7 +198,7 @@ public class InscripcionData {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("año"));
+                materia.setAnioMateria(rs.getInt("anio"));
                 materias.add(materia);
             }
             ps.close();

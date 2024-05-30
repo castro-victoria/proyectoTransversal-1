@@ -47,7 +47,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         filaCabecera.add("Nombre");
         filaCabecera.add("Año");
         for (Object it : filaCabecera) {
-            modelo.addColumn(modelo);
+            modelo.addColumn(it);
         }
         jtMaterias.setModel(modelo);
     }
@@ -70,7 +70,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void cargaDatosInscriptas() {
         Alumno selec = (Alumno) cboxAlumno.getSelectedItem();
-        List<Materia> lista = inscData.obtenerMateriaNoCursadas(selec.getIdAlumno());
+        List<Materia> lista = inscData.obtenerMateriasCursadas(selec.getIdAlumno());
         for (Materia m : lista) {
             modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
         }

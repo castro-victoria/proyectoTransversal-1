@@ -47,8 +47,10 @@ public class MenuView extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jitem = new javax.swing.JMenu();
+        Inscripciones = new javax.swing.JMenuItem();
         jItemSalir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        alumXmateria = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -98,6 +100,14 @@ public class MenuView extends javax.swing.JFrame {
             }
         });
 
+        Inscripciones.setText("Manejo de Inscripciones");
+        Inscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InscripcionesActionPerformed(evt);
+            }
+        });
+        jitem.add(Inscripciones);
+
         jItemSalir.setText("Actualizar notas");
         jItemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +119,15 @@ public class MenuView extends javax.swing.JFrame {
         jMenuBar7.add(jitem);
 
         jMenu2.setText("Consultas");
+
+        alumXmateria.setText("Alumnos por Materia");
+        alumXmateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alumXmateriaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(alumXmateria);
+
         jMenuBar7.add(jMenu2);
 
         jMenu3.setText("Salir");
@@ -184,6 +203,24 @@ public class MenuView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void alumXmateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumXmateriaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ConsultaAlumnosXMateria aluXMat = new ConsultaAlumnosXMateria();
+        aluXMat.setVisible(true);
+        aluXMat.getContentPane().setBackground(new Color(68, 167, 132));
+        escritorio.add(aluXMat);
+    }//GEN-LAST:event_alumXmateriaActionPerformed
+
+    private void InscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscripcionesActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioInscripcion insc = new FormularioInscripcion();
+        insc.setVisible(true);
+        insc.getContentPane().setBackground(new Color(68, 167, 132));
+        escritorio.add(insc);
+    }//GEN-LAST:event_InscripcionesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,6 +257,8 @@ public class MenuView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Inscripciones;
+    private javax.swing.JMenuItem alumXmateria;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem jAlumnosItem;
     private javax.swing.JMenuItem jItemSalir;
