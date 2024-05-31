@@ -145,7 +145,6 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         });
 
         jtMaterias.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jtMaterias.setForeground(new java.awt.Color(204, 204, 255));
         jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
