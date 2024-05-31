@@ -81,7 +81,12 @@ public class MenuView extends javax.swing.JFrame {
 
         jMenuBar7.add(jMenu16);
 
-        jMenu1.setText("Materia");
+        jMenu1.setBorder(null);
+        jMenu1.setText("Materia  ");
+        jMenu1.setAlignmentX(0.6F);
+        jMenu1.setAlignmentY(0.6F);
+        jMenu1.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        jMenu1.setMargin(new java.awt.Insets(3, 6, 4, 6));
 
         jMenuItem2.setText("Formulario de Materia");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +98,9 @@ public class MenuView extends javax.swing.JFrame {
 
         jMenuBar7.add(jMenu1);
 
+        jitem.setBorder(null);
         jitem.setText("Administración");
+        jitem.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jitem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jitemActionPerformed(evt);
@@ -119,6 +126,7 @@ public class MenuView extends javax.swing.JFrame {
         jMenuBar7.add(jitem);
 
         jMenu2.setText("Consultas");
+        jMenu2.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
 
         alumXmateria.setText("Alumnos por Materia");
         alumXmateria.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +139,7 @@ public class MenuView extends javax.swing.JFrame {
         jMenuBar7.add(jMenu2);
 
         jMenu3.setText("Salir");
+        jMenu3.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu3ActionPerformed(evt);
